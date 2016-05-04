@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2013-2015, Maik Schreiber
+Copyright (c) 2013-2016, Maik Schreiber
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -23,7 +23,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,9 +33,8 @@ namespace Toolbar {
 	[KSPAddonFixed(KSPAddon.Startup.EveryScene, true, typeof(ToolbarManager))]
 	public partial class ToolbarManager : MonoBehaviour, IToolbarManager {
 		private static readonly string SETTINGS_FILE = KSPUtil.ApplicationRootPath + "GameData/toolbar-settings.dat";
-		internal const string FORUM_THREAD_URL = "http://forum.kerbalspaceprogram.com/threads/60863";
+		internal const string FORUM_THREAD_URL = "http://forum.kerbalspaceprogram.com/index.php?/topic/55420-105-toolbar-1710-common-api-for-draggableresizable-buttons-toolbar/";
 		internal const string NAMESPACE_INTERNAL = "__TOOLBAR_INTERNAL";
-		internal const int VERSION = 25;
 
 		internal static ToolbarManager InternalInstance;
 
@@ -59,7 +58,6 @@ namespace Toolbar {
 		}
 
 		internal event Action OnCommandAdded;
-		internal readonly UpdateChecker UpdateChecker;
 
 		private Dictionary<string, Toolbar> toolbars;
 		private ConfigNode settings;
@@ -77,8 +75,6 @@ namespace Toolbar {
 
 				commands_ = new HashSet<Command>();
 				toolbars = new Dictionary<string, Toolbar>();
-
-				UpdateChecker = new UpdateChecker();
 
 				loadSettings(ToolbarGameScene.MAINMENU);
 			} else {
@@ -125,7 +121,6 @@ namespace Toolbar {
 				foreach (Toolbar toolbar in toolbars.Values) {
 					toolbar.update();
 				}
-				UpdateChecker.update();
 				if (ShowGUI) {
 					CursorGrabbing.Instance.update();
 				}
@@ -188,9 +183,6 @@ namespace Toolbar {
 				Log.info("no toolbars in current game scene, adding default toolbar");
 				addToolbar();
 			}
-
-			Log.info("update check {0}", checkForUpdates ? "enabled" : "disabled");
-			UpdateChecker.CheckForUpdates = checkForUpdates;
 		}
 
 		private ConfigNode loadSettings() {
