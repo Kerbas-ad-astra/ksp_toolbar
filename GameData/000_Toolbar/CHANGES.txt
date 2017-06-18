@@ -1,10 +1,4 @@
-﻿1.7.14 2017-06-08
- - Adoption by LinuxGuruGamer
- - Recompiled for KSP 1.3
- - Added embeding version into assembly data
- - Fixed dialog popup in InstallChecker for new parameter
-
-1.7.13, 2016-10-15
+﻿1.7.13, 2016-10-15
 - Updated for KSP 1.2.0.
 - Please note that the 32-bit version of KSP will no longer be supported.
 - Plugin developers: Please update ToolbarWrapper.cs in your project.

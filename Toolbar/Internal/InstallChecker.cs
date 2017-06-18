@@ -43,6 +43,7 @@ namespace Toolbar {
 				IEnumerable<string> badPaths = assemblies
 					.Select(a => Uri.UnescapeDataString(rootUri.MakeRelativeUri(new Uri(a.path)).ToString().Replace('/', Path.DirectorySeparatorChar)));
 				PopupDialog.SpawnPopupDialog(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
+                    "IncorrectToolbarPluginInstallation",
 					"Incorrect Toolbar Plugin Installation",
 					"The Toolbar Plugin has been installed incorrectly and will not function properly. All Toolbar Plugin files " +
 					"should be located in GameData" + Path.DirectorySeparatorChar + "000_Toolbar (case sensitive.) \n\n" +
